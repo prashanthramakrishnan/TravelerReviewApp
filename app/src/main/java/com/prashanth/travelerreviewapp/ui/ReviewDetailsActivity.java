@@ -69,8 +69,18 @@ public class ReviewDetailsActivity extends AppCompatActivity {
             }
 
             binding.authorValue.setText(author);
-            binding.countryValue.setText(country);
-            binding.reviewMessageValue.setText(reviewMessage);
+
+            if (getString(R.string.empty).equals(reviewMessage)) {
+                binding.reviewMessageLayout.setVisibility(View.GONE);
+            } else {
+                binding.reviewMessageValue.setText(reviewMessage);
+            }
+
+            if (getString(R.string.empty).equals(country)) {
+                binding.countryLayout.setVisibility(View.GONE);
+            } else {
+                binding.countryValue.setText(country);
+            }
 
             if (getString(R.string.empty).equals(city)) {
                 binding.cityLayout.setVisibility(View.GONE);
