@@ -8,6 +8,7 @@ import retrofit2.http.Query;
 
 public interface TravelerReviewsAPI {
 
+    // API doesn't work without these headers!!
     @Headers({"User-Agent: PostmanRuntime/7.17.1"})
     @GET("/travelers-api-forwarding/travelers/activities/23776/reviews")
     Observable<TravelerReviewAPIResponse> getReviews(@Query("limit") int limit, @Query("offset") int offset);

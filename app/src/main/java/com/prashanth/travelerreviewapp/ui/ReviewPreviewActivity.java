@@ -25,8 +25,8 @@ public class ReviewPreviewActivity extends AppCompatActivity {
 
         binding.tourReviewHeading.setText(R.string.tour_review_title);
 
-        binding.previewList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        adapter = new TravelerReviewListAdapter(getApplicationContext());
+        binding.previewList.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new TravelerReviewListAdapter(this);
 
         viewModel.getReviewLiveData().observe(this, pagedList -> adapter.submitList(pagedList));
 
