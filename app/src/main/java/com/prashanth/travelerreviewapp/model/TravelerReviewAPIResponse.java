@@ -27,6 +27,9 @@ public class TravelerReviewAPIResponse implements Parcelable {
     @SerializedName("pagination")
     private PaginationModel paginationModel;
 
+    public TravelerReviewAPIResponse() {
+    }
+
     protected TravelerReviewAPIResponse(Parcel in) {
         id = Utils.getRandomNumber();
         reviewList = in.createTypedArrayList(Review.CREATOR);
