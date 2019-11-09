@@ -125,7 +125,6 @@ public class TravelerReviewListAdapter extends PagedListAdapter<Review, Recycler
 
         void bindTo(Review review) {
             binding.authorId.setVisibility(View.VISIBLE);
-            binding.reviewMessage.setVisibility(View.VISIBLE);
             binding.ratingStars.setVisibility(View.VISIBLE);
 
             String author =

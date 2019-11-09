@@ -69,12 +69,33 @@ public class ReviewDetailsActivity extends AppCompatActivity {
             }
 
             binding.authorValue.setText(author);
-            binding.cityValue.setText(city);
             binding.countryValue.setText(country);
-            binding.titleValue.setText(title);
             binding.reviewMessageValue.setText(reviewMessage);
-            binding.enjoymentValue.setText(enjoyment);
-            binding.travelerTypeValue.setText(tripType);
+
+            if (getString(R.string.empty).equals(city)) {
+                binding.cityLayout.setVisibility(View.GONE);
+            } else {
+                binding.cityValue.setText(city);
+            }
+
+            if (getString(R.string.empty).equals(title)) {
+                binding.titleLayout.setVisibility(View.GONE);
+            } else {
+                binding.titleValue.setText(title);
+            }
+
+            if (getString(R.string.empty).equals(enjoyment)) {
+                binding.enjoymentLayout.setVisibility(View.GONE);
+            } else {
+                binding.enjoymentValue.setText(enjoyment);
+            }
+
+            if (getString(R.string.empty).equals(tripType)) {
+                binding.travelerTypeLayout.setVisibility(View.GONE);
+            } else {
+                binding.travelerTypeValue.setText(tripType);
+            }
+
             if (Utils.parseDate(reviewedDate) != null) {
                 binding.reviewedDate.setText(Utils.parseDate(reviewedDate));
             }
