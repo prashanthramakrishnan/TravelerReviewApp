@@ -13,8 +13,6 @@ view, clicking on it launches the review details screen.
 - Does'nt use the sort query parameter for the API to sort ratings, only uses the limit and offset queries for pagination
 - Includes unit tests for ViewModel and instrumentation tests using Robotium and MockWebServer for the app flow.
 - Uses Android architecture components - LiveData, ViewModel, Paging library -the RecyclerView list automatically hands pagination with the help of Paging library
-- I Decided to not use dependency injection although in my first commit I did use Dagger2 and later reverted it back.
-- I used the MaterialRatingBar library to show the rating stars in the app (Quite a handy one!).
 
 Refer [here](https://gist.github.com/jemshit/767ab25a9670eb0083bafa65f8d786bb) for proguard rules.
 
@@ -24,7 +22,10 @@ added that specifies the User-Agent explicitly as Postman.
 - Styling and animations are minimum, I used Android CardView to show the list and LinearLayout with TextViews for the details screen, 
 everything is pretty straight-forward
 - If a photo is present it is shown in the details screen, I used Glide to load images.
+- I Decided to not use dependency injection although in my first commit I did use Dagger2 and later reverted it back.
+- I used the MaterialRatingBar library to show the rating stars in the app (Quite a handy one!).
 - There is no database in this application, data is shown as is from the API calls!
+- Networking errors are shown as-is.
 - Tested on Moto G4 running Android 7.0, I don't prefer using the Emulator.
 - Development tools: Android Studio-3.5.2 with Gradle-3.5.2, Gradle wrapper-5.4.1.
 
