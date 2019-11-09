@@ -9,14 +9,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIFactory {
 
-    public static TravelerReviewsAPI create() {
+    public static TravelerReviewsAPI create(String url) {
         HttpLoggingInterceptor debugInterceptor = new HttpLoggingInterceptor();
         debugInterceptor.level(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         if (BuildConfig.DEBUG) {
             httpClient.addInterceptor(debugInterceptor);
         }
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(BuildConfig.NETWORK_URL)
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(httpClient.build())

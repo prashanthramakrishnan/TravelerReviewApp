@@ -8,7 +8,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.prashanth.travelerreviewapp.TestRunner"
         buildConfigField "String", "NETWORK_URL", "\"${project.url}\""
     }
     buildTypes {
@@ -52,7 +52,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-v4'
     }
     //Commons
-    testImplementation 'org.apache.directory.studio:org.apache.commons.io:2.4'
+    androidTestImplementation 'org.apache.directory.studio:org.apache.commons.io:2.4'
 
     //RxJava
     implementation "io.reactivex.rxjava2:rxjava:2.2.7"

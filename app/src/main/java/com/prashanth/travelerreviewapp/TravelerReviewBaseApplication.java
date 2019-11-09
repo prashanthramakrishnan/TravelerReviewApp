@@ -9,6 +9,12 @@ public class TravelerReviewBaseApplication extends Application {
 
     private TravelerReviewsAPI api;
 
+    protected String apiURL = BuildConfig.NETWORK_URL;
+
+    protected String getUrl() {
+        return apiURL;
+    }
+
     private static TravelerReviewBaseApplication get(Context context) {
         return (TravelerReviewBaseApplication) context.getApplicationContext();
     }
@@ -19,7 +25,7 @@ public class TravelerReviewBaseApplication extends Application {
 
     public TravelerReviewsAPI getApi() {
         if (api == null) {
-            api = APIFactory.create();
+            api = APIFactory.create(getUrl());
         }
         return api;
     }

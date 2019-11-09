@@ -1,0 +1,158 @@
+{
+  "reviews": [
+    {
+      "id": 10096487,
+      "author": {
+        "fullName": "Guy",
+        "country": "Israel"
+      },
+      "title": "",
+      "message": "The tour is very interesting and comprehensive and lets you get inside restricted areas of the now empty Airport. Our guide was very knowledgable and we got to see different parts of this very interesting building and to learn a lot about its rich history through ime.",
+      "enjoyment": "",
+      "isAnonymous": false,
+      "rating": 5,
+      "created": "2019-10-17T13:59:56+02:00",
+      "language": "en",
+      "travelerType": "solo"
+    },
+    {
+      "id": 9926468,
+      "author": {
+        "fullName": "Anonymous",
+        "country": "United Kingdom"
+      },
+      "title": "",
+      "message": "A thoroughly enjoyable tour and better than we expected. The guide was not only very knowledgeable but was able to bring some very interesting points into play in a humorous way.",
+      "enjoyment": "",
+      "isAnonymous": true,
+      "rating": 5,
+      "created": "2019-10-10T18:42:19+02:00",
+      "language": "en",
+      "travelerType": "old family"
+    },
+    {
+      "id": 9796438,
+      "author": {
+        "fullName": "Jennifer",
+        "country": "United States"
+      },
+      "title": "",
+      "message": "Really found the tour interesting and full of history!",
+      "enjoyment": "Our guide, Lars, was very passionate about telling us about the architecture and history of the building and surrounding areas.",
+      "isAnonymous": false,
+      "rating": 5,
+      "created": "2019-10-05T13:36:30+02:00",
+      "language": "en",
+      "travelerType": "couple"
+    },
+    {
+      "id": 9661558,
+      "author": {
+        "fullName": "Beatrice",
+        "country": "United Kingdom"
+      },
+      "title": "Great guide and interesting tour to Tempelhof airport",
+      "message": "",
+      "enjoyment": "",
+      "isAnonymous": false,
+      "rating": 5,
+      "created": "2019-09-29T13:56:43+02:00",
+      "language": "en",
+      "travelerType": "solo"
+    },
+    {
+      "id": 9423018,
+      "author": {
+        "fullName": "Maxim",
+        "country": "Russia"
+      },
+      "title": "",
+      "message": "A glance into the history of Nazi-built airport",
+      "enjoyment": "",
+      "isAnonymous": false,
+      "rating": 3,
+      "created": "2019-09-18T19:11:00+02:00",
+      "language": "en"
+    },
+    {
+      "id": 9421418,
+      "author": {
+        "fullName": "Luis",
+        "country": "United Kingdom"
+      },
+      "title": "",
+      "message": "A great tour. Our guide (a young Dutch fellow) was also fantastic! Definitely a recommend in Berlin",
+      "enjoyment": "",
+      "isAnonymous": false,
+      "rating": 5,
+      "created": "2019-09-18T18:07:44+02:00",
+      "language": "en"
+    },
+    {
+      "id": 9286728,
+      "author": {
+        "fullName": "Stephen",
+        "country": "United Kingdom"
+      },
+      "title": "Great guide, fantastic architecture!",
+      "message": "Great knowledgeable guide and a fabulous building to visit. Shame the hangers were closed due to other commitments.",
+      "enjoyment": "",
+      "isAnonymous": false,
+      "rating": 4,
+      "created": "2019-09-12T19:28:49+02:00",
+      "language": "en",
+      "travelerType": "old family"
+    },
+    {
+      "id": 8997760,
+      "author": {
+        "fullName": "Jamie",
+        "country": "United Kingdom"
+      },
+      "title": "",
+      "message": "Fantastic one of my top 3 things I did while in Berlin.\nMade even better by the best tour guide I've ever met!",
+      "enjoyment": "",
+      "isAnonymous": false,
+      "rating": 5,
+      "created": "2019-08-30T15:54:36+02:00",
+      "language": "en",
+      "travelerType": "old family"
+    },
+    {
+      "id": 8915890,
+      "author": {
+        "fullName": "Tim",
+        "country": "United Kingdom"
+      },
+      "title": "Fantastic, informative, insightful",
+      "message": "",
+      "enjoyment": "",
+      "isAnonymous": false,
+      "rating": 5,
+      "created": "2019-08-27T09:28:39+02:00",
+      "language": "en",
+      "travelerType": "friends"
+    },
+    {
+      "id": 8635955,
+      "author": {
+        "fullName": "Eva",
+        "country": "Czech Republic"
+      },
+      "title": "",
+      "message": "Very informative.",
+      "enjoyment": "",
+      "isAnonymous": false,
+      "rating": 5,
+      "created": "2019-08-17T13:42:52+02:00",
+      "language": "en",
+      "travelerType": "solo"
+    }
+  ],
+  "totalCount": 1294,
+  "averageRating": 4.7241,
+  "pagination": {
+    "limit": 10,
+    "offset": 0
+  }
+}
