@@ -1,7 +1,6 @@
 package com.prashanth.travelerreviewapp.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +11,7 @@ import com.prashanth.travelerreviewapp.R;
 import com.prashanth.travelerreviewapp.databinding.ItemLoadingBinding;
 import com.prashanth.travelerreviewapp.databinding.ReviewItemDataBinding;
 import com.prashanth.travelerreviewapp.model.Review;
-import com.prashanth.travelerreviewapp.ui.ReviewDetailsActivity;
 import com.prashanth.travelerreviewapp.utils.DataFetchState;
-import com.prashanth.travelerreviewapp.utils.Utils;
 
 public class TravelerReviewListAdapter extends PagedListAdapter<Review, RecyclerView.ViewHolder> {
 
@@ -25,6 +22,8 @@ public class TravelerReviewListAdapter extends PagedListAdapter<Review, Recycler
     private Context context;
 
     private DataFetchState dataFetchState;
+
+    private TravelerReviewListAdapter.OnReviewItemClickListener onReviewItemClickListener;
 
     public TravelerReviewListAdapter(Context context) {
         super(Review.DIFF_CALLBACK);
@@ -50,10 +49,9 @@ public class TravelerReviewListAdapter extends PagedListAdapter<Review, Recycler
         if (holder instanceof ReviewPreviewItemViewHolder) {
             ((ReviewPreviewItemViewHolder) holder).bindTo(getItem(position));
             holder.itemView.setOnClickListener(v -> {
-                Intent intent = new Intent(context, ReviewDetailsActivity.class);
-                intent.putExtra(Utils.REVIEW_DETAILS, getItem(position));
-                context.startActivity(intent);
-
+                if (onReviewItemClickListener != null) {
+                    onReviewItemClickListener.itemClicked(getItem(position));
+                }
             });
         } else {
             ((ItemLoadingStateViewHolder) holder).bindView(dataFetchState);
@@ -139,6 +137,15 @@ public class TravelerReviewListAdapter extends PagedListAdapter<Review, Recycler
             binding.authorValue.setText(author);
             binding.reviewMessageValue.setText(reviewMessage);
         }
+    }
+
+    public interface OnReviewItemClickListener {
+
+        void itemClicked(Review review);
+    }
+
+    public void setOnReviewItemClickListener(TravelerReviewListAdapter.OnReviewItemClickListener onReviewItemClickListener) {
+        this.onReviewItemClickListener = onReviewItemClickListener;
     }
 
 }

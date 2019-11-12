@@ -1,5 +1,6 @@
 package com.prashanth.travelerreviewapp.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,9 +10,11 @@ import com.prashanth.travelerreviewapp.R;
 import com.prashanth.travelerreviewapp.TravelerReviewBaseApplication;
 import com.prashanth.travelerreviewapp.adapter.TravelerReviewListAdapter;
 import com.prashanth.travelerreviewapp.databinding.ReviewPreviewBinding;
+import com.prashanth.travelerreviewapp.model.Review;
+import com.prashanth.travelerreviewapp.utils.Utils;
 import com.prashanth.travelerreviewapp.viewmodel.TravelerReviewResponseViewModel;
 
-public class ReviewPreviewActivity extends AppCompatActivity {
+public class ReviewPreviewActivity extends AppCompatActivity implements TravelerReviewListAdapter.OnReviewItemClickListener {
 
     private TravelerReviewListAdapter adapter;
 
@@ -27,11 +30,19 @@ public class ReviewPreviewActivity extends AppCompatActivity {
 
         binding.previewList.setLayoutManager(new LinearLayoutManager(this));
         adapter = new TravelerReviewListAdapter(this);
+        adapter.setOnReviewItemClickListener(this);
 
         viewModel.getReviewLiveData().observe(this, pagedList -> adapter.submitList(pagedList));
 
         viewModel.getDataFetchState().observe(this, dataFetchState -> adapter.setDataFetchState(dataFetchState));
 
         binding.previewList.setAdapter(adapter);
+    }
+
+    @Override
+    public void itemClicked(Review review) {
+        Intent intent = new Intent(this, ReviewDetailsActivity.class);
+        intent.putExtra(Utils.REVIEW_DETAILS, review);
+        startActivity(intent);
     }
 }
