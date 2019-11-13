@@ -9,7 +9,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
 import androidx.lifecycle.Observer;
-import com.prashanth.travelerreviewapp.TravelerReviewBaseApplication;
+import com.prashanth.travelerreviewapp.datasource.factory.TravelerViewResponseDataFactory;
 import com.prashanth.travelerreviewapp.model.TravelerReviewAPIResponse;
 import com.prashanth.travelerreviewapp.network.TravelerReviewsAPI;
 import com.prashanth.travelerreviewapp.utils.DataFetchState;
@@ -33,9 +33,6 @@ public class TravelerReviewResponseViewModelTest {
     public InstantTaskExecutorRule instantExecutorRule = new InstantTaskExecutorRule();
 
     @Mock
-    TravelerReviewBaseApplication application;
-
-    @Mock
     LifecycleOwner lifecycleOwner;
 
     @Mock
@@ -46,11 +43,14 @@ public class TravelerReviewResponseViewModelTest {
 
     private TravelerReviewResponseViewModel viewModel;
 
+    @Mock
+    TravelerViewResponseDataFactory travelerViewResponseDataFactory;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         Lifecycle lifecycle = new LifecycleRegistry(lifecycleOwner);
-        viewModel = new TravelerReviewResponseViewModel(application);
+        viewModel = new TravelerReviewResponseViewModel(travelerViewResponseDataFactory);
         viewModel.getDataFetchState().observeForever(dataFetchStateObserver);
     }
 
@@ -62,21 +62,18 @@ public class TravelerReviewResponseViewModelTest {
 
     @Test
     public void testNull() {
-        when(application.getApi()).thenReturn(null);
         assertNotNull(viewModel.getDataFetchState());
         assertTrue(viewModel.getDataFetchState().hasObservers());
     }
 
     @Test
     public void testApiSuccess() {
-        when(application.getApi()).thenReturn(mockAPI);
         when(mockAPI.getReviews(1, 1)).thenReturn(Observable.just(new TravelerReviewAPIResponse()));
         assertTrue(viewModel.getDataFetchState().hasObservers());
     }
 
     @Test
     public void testApiFailure() {
-        when(application.getApi()).thenReturn(mockAPI);
         when(mockAPI.getReviews(1, 1)).thenReturn(Observable.error(new Throwable("Error")));
         assertTrue(viewModel.getDataFetchState().hasObservers());
     }

@@ -1,20 +1,13 @@
 package com.prashanth.traverlerreviewapp;
 
 import com.prashanth.travelerreviewapp.TravelerReviewBaseApplication;
-import timber.log.Timber;
+import com.prashanth.travelerreviewapp.di.DaggerAppDaggerGraph;
+import com.prashanth.travelerreviewapp.di.NetworkDaggerModule;
 
-public class TravelerReviewTestApplication extends TravelerReviewBaseApplication {
+public class TravelerReviewTestApplication extends TravelerReviewApplication {
 
-    private static final String apiURL = "http://localhost:8080/";
-
-    @Override
-    protected String getUrl() {
-        return apiURL;
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        Timber.plant(new Timber.DebugTree());
+    protected DaggerAppDaggerGraph.Builder daggerComponent(TravelerReviewBaseApplication application) {
+        return super.daggerComponent(this)
+                .networkDaggerModule(new NetworkDaggerModule("http://localhost:8080/"));
     }
 }

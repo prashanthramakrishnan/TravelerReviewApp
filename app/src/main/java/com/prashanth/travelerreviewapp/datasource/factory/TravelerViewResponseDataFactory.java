@@ -4,23 +4,24 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.paging.DataSource;
 import com.prashanth.travelerreviewapp.TravelerReviewBaseApplication;
 import com.prashanth.travelerreviewapp.datasource.TravelerReviewResponseDataSource;
+import javax.inject.Inject;
 import org.jetbrains.annotations.NotNull;
 
 public class TravelerViewResponseDataFactory extends DataSource.Factory {
 
-    private MutableLiveData<TravelerReviewResponseDataSource> mutableLiveData;
+    MutableLiveData<TravelerReviewResponseDataSource> mutableLiveData = new MutableLiveData<>();
 
-    private TravelerReviewBaseApplication travelerReviewBaseApplication;
+    @Inject
+    TravelerReviewResponseDataSource travelerReviewResponseDataSource;
 
-    public TravelerViewResponseDataFactory(TravelerReviewBaseApplication travelerReviewBaseApplication) {
-        this.travelerReviewBaseApplication = travelerReviewBaseApplication;
-        this.mutableLiveData = new MutableLiveData<>();
+    @Inject
+    public TravelerViewResponseDataFactory() {
+        TravelerReviewBaseApplication.component.inject(this);
     }
 
     @NotNull
     @Override
     public DataSource create() {
-        TravelerReviewResponseDataSource travelerReviewResponseDataSource = new TravelerReviewResponseDataSource(travelerReviewBaseApplication);
         mutableLiveData.postValue(travelerReviewResponseDataSource);
         return travelerReviewResponseDataSource;
     }

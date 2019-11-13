@@ -1,37 +1,24 @@
 package com.prashanth.travelerreviewapp;
 
 import android.app.Application;
-import android.content.Context;
-import com.prashanth.travelerreviewapp.network.APIFactory;
-import com.prashanth.travelerreviewapp.network.TravelerReviewsAPI;
+import com.prashanth.travelerreviewapp.di.AppDaggerGraph;
+import com.prashanth.travelerreviewapp.di.ApplicationModule;
+import com.prashanth.travelerreviewapp.di.DaggerAppDaggerGraph;
+import com.prashanth.travelerreviewapp.di.NetworkDaggerModule;
 
 public class TravelerReviewBaseApplication extends Application {
 
-    private TravelerReviewsAPI api;
+    public static AppDaggerGraph component;
 
-    protected String apiURL = BuildConfig.NETWORK_URL;
-
-    protected String getUrl() {
-        return apiURL;
-    }
-
-    private static TravelerReviewBaseApplication get(Context context) {
-        return (TravelerReviewBaseApplication) context.getApplicationContext();
-    }
-
-    public static TravelerReviewBaseApplication create(Context context) {
-        return TravelerReviewBaseApplication.get(context);
-    }
-
-    public TravelerReviewsAPI getApi() {
-        if (api == null) {
-            api = APIFactory.create(getUrl());
-        }
-        return api;
+    protected DaggerAppDaggerGraph.Builder daggerComponent(TravelerReviewBaseApplication application) {
+        return DaggerAppDaggerGraph.builder()
+                .networkDaggerModule(new NetworkDaggerModule(BuildConfig.NETWORK_URL))
+                .applicationModule(new ApplicationModule(this));
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        component = daggerComponent(this).build();
     }
 }

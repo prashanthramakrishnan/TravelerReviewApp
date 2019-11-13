@@ -6,28 +6,29 @@ import androidx.paging.PageKeyedDataSource;
 import com.prashanth.travelerreviewapp.TravelerReviewBaseApplication;
 import com.prashanth.travelerreviewapp.model.Review;
 import com.prashanth.travelerreviewapp.model.TravelerReviewAPIResponse;
+import com.prashanth.travelerreviewapp.network.TravelerReviewsAPI;
 import com.prashanth.travelerreviewapp.utils.DataFetchState;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
+import javax.inject.Inject;
 
 public class TravelerReviewResponseDataSource extends PageKeyedDataSource<Long, Review> {
 
-    private MutableLiveData dataFetchState;
+    private MutableLiveData dataFetchState = new MutableLiveData();
 
-    private MutableLiveData initialLoading;
+    private MutableLiveData initialLoading = new MutableLiveData();
 
-    private TravelerReviewBaseApplication travelerReviewBaseApplication;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    private CompositeDisposable compositeDisposable;
+    @Inject
+    TravelerReviewsAPI api;
 
-    public TravelerReviewResponseDataSource(TravelerReviewBaseApplication travelerReviewBaseApplication) {
-        this.travelerReviewBaseApplication = travelerReviewBaseApplication;
-        this.dataFetchState = new MutableLiveData();
-        this.initialLoading = new MutableLiveData();
-        this.compositeDisposable = new CompositeDisposable();
+    @Inject
+    public TravelerReviewResponseDataSource() {
+        TravelerReviewBaseApplication.component.inject(this);
     }
 
     public MutableLiveData getDataFetchState() {
@@ -39,7 +40,7 @@ public class TravelerReviewResponseDataSource extends PageKeyedDataSource<Long, 
         initialLoading.postValue(DataFetchState.LOADING);
         dataFetchState.postValue(DataFetchState.LOADING);
 
-        Disposable disposable = travelerReviewBaseApplication.getApi().getReviews(10, params.requestedLoadSize)
+        Disposable disposable = api.getReviews(10, params.requestedLoadSize)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<TravelerReviewAPIResponse>() {
@@ -73,7 +74,7 @@ public class TravelerReviewResponseDataSource extends PageKeyedDataSource<Long, 
     @Override
     public void loadAfter(@NonNull LoadParams<Long> params, @NonNull LoadCallback<Long, Review> callback) {
         dataFetchState.postValue(DataFetchState.LOADING);
-        Disposable disposable = travelerReviewBaseApplication.getApi().getReviews(params.requestedLoadSize, params.key.intValue())
+        Disposable disposable = api.getReviews(params.requestedLoadSize, params.key.intValue())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<TravelerReviewAPIResponse>() {

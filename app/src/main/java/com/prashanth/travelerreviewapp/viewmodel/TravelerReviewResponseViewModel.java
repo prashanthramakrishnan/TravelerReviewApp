@@ -1,8 +1,9 @@
 package com.prashanth.travelerreviewapp.viewmodel;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 import androidx.paging.LivePagedListBuilder;
@@ -14,24 +15,30 @@ import com.prashanth.travelerreviewapp.model.Review;
 import com.prashanth.travelerreviewapp.utils.DataFetchState;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import javax.inject.Inject;
 
 public class TravelerReviewResponseViewModel extends ViewModel {
 
-    private LiveData<DataFetchState> dataFetchState;
+    private LiveData<DataFetchState> dataFetchState = new MutableLiveData<>();
 
-    private LiveData<PagedList<Review>> reviewLiveData;
+    private LiveData<PagedList<Review>> reviewLiveData = new MutableLiveData<>();
 
-    private TravelerReviewBaseApplication travelerReviewBaseApplication;
+    @Inject
+    TravelerViewResponseDataFactory travelerViewResponseDataFactory;
 
-    public TravelerReviewResponseViewModel(@NonNull TravelerReviewBaseApplication travelerReviewBaseApplication) {
-        this.travelerReviewBaseApplication = travelerReviewBaseApplication;
+    @Inject
+    public TravelerReviewResponseViewModel() {
+        TravelerReviewBaseApplication.component.inject(this);
         init();
+    }
+
+    @VisibleForTesting
+    public TravelerReviewResponseViewModel(TravelerViewResponseDataFactory travelerViewResponseDataFactory) {
+        this.travelerViewResponseDataFactory = travelerViewResponseDataFactory;
     }
 
     private void init() {
         Executor executor = Executors.newFixedThreadPool(5);
-
-        TravelerViewResponseDataFactory travelerViewResponseDataFactory = new TravelerViewResponseDataFactory(travelerReviewBaseApplication);
         dataFetchState = Transformations.switchMap(travelerViewResponseDataFactory.getMutableLiveData(),
                 (Function<TravelerReviewResponseDataSource, LiveData<DataFetchState>>) TravelerReviewResponseDataSource::getDataFetchState);
 

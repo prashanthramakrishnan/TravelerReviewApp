@@ -13,18 +13,21 @@ import com.prashanth.travelerreviewapp.databinding.ReviewPreviewBinding;
 import com.prashanth.travelerreviewapp.model.Review;
 import com.prashanth.travelerreviewapp.utils.Utils;
 import com.prashanth.travelerreviewapp.viewmodel.TravelerReviewResponseViewModel;
+import javax.inject.Inject;
 
 public class ReviewPreviewActivity extends AppCompatActivity implements TravelerReviewListAdapter.OnReviewItemClickListener {
 
     private TravelerReviewListAdapter adapter;
 
+    @Inject
+    TravelerReviewResponseViewModel viewModel;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TravelerReviewBaseApplication.component.inject(this);
 
         ReviewPreviewBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_review_preview);
-
-        TravelerReviewResponseViewModel viewModel = new TravelerReviewResponseViewModel(TravelerReviewBaseApplication.create(this));
 
         binding.tourReviewHeading.setText(R.string.tour_review_title);
 
