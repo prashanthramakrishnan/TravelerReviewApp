@@ -30,6 +30,7 @@ everything is pretty straight-forward
 - Development tools: Android Studio-3.5.2 with Gradle-3.5.2, Gradle wrapper-5.4.1.
 
 **Open source libaries used**
+- **[Dagger2](https://github.com/google/dagger)**
 - **[RxJava2](https://github.com/ReactiveX/RxJava)**
 - **[RxAndroid](https://github.com/ReactiveX/RxAndroid)**
 - **[Retrofit2](https://github.com/square/retrofit)**
